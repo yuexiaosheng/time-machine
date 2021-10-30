@@ -3,6 +3,8 @@ import java.io.InputStream;
 import java.net.URL;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+import java.util.*;
+import java.text.*;
 public class MyAudioPlayer {
     private URL url = null;// 音乐文件的URl
     private AudioStream as = null;// 播放器
@@ -21,12 +23,23 @@ public class MyAudioPlayer {
     public void play() {
         AudioPlayer.player.start(as);// 用AudioPlayer静态成员player.start播放音乐
     }
-    public static void main(String[] args) {
 
+    public static void printTime(){
+        Date now = new Date();
+        DateFormat d2 = DateFormat.getDateTimeInstance();
+        String str2 = d2.format(now);
+        System.out.println(str2);
+    }
+
+    public static void main(String[] args) {
         System.out.println("sleep 45 minutes");
-      try {
-          Thread.sleep(45*60*1000);
-      }catch(Exception ex){}
+        for(int i=0;i<9;i++) {//9次，每个5分钟，打印当前时间
+            printTime();
+            try {
+                Thread.sleep(5 * 60 * 1000);//60 * 1000是60秒
+            } catch (Exception ex) {
+            }
+        }
         new MyAudioPlayer().play();
     }
 }
